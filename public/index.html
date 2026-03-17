@@ -54,6 +54,7 @@
 
         table{
             border-collapse: collapse;
+            width: 100%;
         }
         thead,th{
             background-color: blue;
@@ -84,6 +85,29 @@
         button:hover{
             background-color: white;
         }
+
+        article{
+            display: flex;
+            flex-direction: row;
+        }
+
+        aside{
+            display: flex;
+            flex-direction: column;
+            flex-grow: 2;
+            flex: 1;
+            background-color: white;
+        }
+
+        .scrollable{
+            overflow-y: scroll;
+            display: flex;
+            flex: 3;
+            max-height: 80vh;
+            flex-grow: 4;
+        }
+
+
     </style>
 </head>
 <body>
@@ -100,21 +124,31 @@
             <button onclick="search()">Search</button>
         </section>
 
-        <section class="card">
-            <table class="card">
-                <thead>
-                    <tr>
-                        <th>Name <button onclick="sortByName()">Sort</button></th>
-                        <th>Series</th>
-                        <th>Image</th>
-                        <th>Release</th>
-                    </tr>
-                </thead>
-                <tbody id="result">
-                    
-                </tbody>
-            </table>
-        </section>
+        <article>
+            <div class="scrollable">
+                <table class="card">
+                    <thead>
+                        <tr>
+                            <th>Name <button onclick="sortByName()">Sort</button></th>
+                            <th>Series</th>
+                            <th>Image</th>
+                            <th>Release</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result">
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <aside>
+                <h1>Supported Games for <span id="character"></span></h1>
+                <ul id="games"></ul>
+            </aside>
+        </article>
+
+
     </main>
 
     <script>
@@ -131,10 +165,13 @@
                 <td>${rec.character}</td>
                 <td>${rec.gameSeries}</td>
                 <td>
-                <img src="${rec.image}">
+                    <img src="${rec.image}">
                 </td>
                 <td>
-                ${rec.release.na}
+                    ${rec.release.na}
+                </td>
+                <td>
+                    <button onclick="viewDetails('${rec.head}',${rec.tail})">View Details</button>
                 </td>
             </tr>`;
                 count++;
@@ -203,6 +240,28 @@
         drawTable(result);
     }
 
+    function getRecord(head,tail){
+        for(let item of state){
+            if(item.head === head && item.tail === tail){
+                return item; 
+            }
+        }
+    }
+
+    function viewDetails(head,tail){
+        let record = getRecord(head,tail); 
+
+        let character = document.querySelector('#character');
+        let result = document.querySelector('#games'); 
+        
+        let html = ''; 
+
+        for(let game of record.gamesSwitch){
+            html+=`<li>${game.gameName}</li>`;
+        }
+        character.innerHTML = record.character; 
+        result.innerHTML = html; 
+    }
 
     showAllGames();
     </script>
