@@ -87,6 +87,9 @@
 
     <main>
         <section id="controls" class="card">
+            <button onclick="filterBySeries('Animal Crossing')">Animal Crossing</button>
+            <button onclick="filterBySeries('Breath of the Wild')">Breath of the Wild</button>
+            <button onclick="filterBySeries('Super Mario')">Super Mario</button>
         </section>
 
         <section id="table" class="card">
@@ -157,6 +160,19 @@
     }
 
     showAllGames();
+
+    function filterBySeries(series){
+        let filtered = [];
+        
+        //iterate the records in the global state
+        for(let rec of state){
+            
+            //push only elements that match the given series
+            if (rec.gameSeries === series)
+            filtered.push(rec);
+        }
+        drawTable(filtered);
+    }
 
     </script>
 </body>
