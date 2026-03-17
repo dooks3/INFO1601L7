@@ -115,6 +115,35 @@
 
     <script>
 
+        
+
+        function drawTable(records){
+
+            let state = []; // global array
+            
+            let result = document.querySelector('#result');
+
+            let html = ''; // create an empty html string
+
+            for (let rec of records){
+                html+=`
+                <tr>
+                        <td>${rec.character}</td>
+                        <td>${rec.gameSeries}</td>
+                        <td><img src="${rec.image}"></td>
+                        <td>${rec.release.na}</td>
+                </tr>`;
+            }
+            result.innerHTML = html;
+        }
+
+        async function getData(){
+            const response = await fetch('https://weblabs.web.app/data/amiibo.json');
+            const data = await response.json;
+            drawTable(data.amiibo.slice(0,100)); // slice method prints the first 100 records
+        }
+
+        getData();
     </script>
 </body>
 </html>
