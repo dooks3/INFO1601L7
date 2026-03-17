@@ -94,7 +94,7 @@
     <main>
         <section class="card">
             <button onclick="filterBySeries('Animal Crossing')">Animal Crossing</button>
-            <button onclick="filterBySeries('Breath of the Wild')">Breath of the Wild</button>
+            <button onclick="filterBySeries('The Legend of Zelda')">The Legend of Zelda</button>
             <button onclick="filterBySeries('Super Mario')">Super Mario</button>
             <input type="search" id="searchKey" placeholder="Search Name">
             <button onclick="search()">Search</button>
@@ -104,7 +104,7 @@
             <table class="card">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Name <button onclick="sortByName()">Sort</button></th>
                         <th>Series</th>
                         <th>Image</th>
                         <th>Release</th>
@@ -120,7 +120,7 @@
     <script>
 
         function drawTable(records){
-            console.log('hello', records);
+
             let html='';
             let result = document.querySelector('#result');
 
@@ -194,7 +194,15 @@
         drawTable(results);
     }
 
-   
+    function nameCompare(a, b){
+        return a.character.localeCompare(b.character);
+    }
+
+    function sortByName(){
+        let result = state.sort(nameCompare);
+        drawTable(result);
+    }
+
 
     showAllGames();
     </script>
