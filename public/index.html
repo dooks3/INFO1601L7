@@ -6,7 +6,75 @@
     <title>Lab 7</title>
 
     <style>
-        
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            padding: 0;
+            background-color: gainsboro;
+            flex-direction: column;
+            margin: 0;
+            gap: 10px;
+        }
+        nav{
+            display: flex;
+            flex-grow: 1;
+            background-color: blue;
+            color: white;
+            font-family: monospace;
+            font-size: 25px;
+            font-weight: bold;
+            box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.31);
+        }
+
+        main{
+            margin-right: auto;
+            margin-left: auto;
+            width: 95vw;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-grow: 10;
+        }
+
+        section{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .card{
+            border-radius: 2px;
+            background-color: white;
+            font-size: 0.7em;
+            padding: 8px;
+            border: 1px solid gainsboro;
+            box-shadow: -11px 9px 5px -4px rgba(0,0,0,0.31);
+        }
+
+        table{
+            border-collapse: collapse;
+        }
+        thead,th{
+            background-color: blue;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        td{
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        tr:nth-child(even){
+            background-color: #f2f2f2;
+        }
+        tr:hover{
+            background-color: #ddd;
+        }
+        table img{
+            height: 100px;
+        }
     </style>
 </head>
 <body>
@@ -15,11 +83,11 @@
     </nav>
 
     <main>
-        <section id="controls">
+        <section id="controls" class="card">
         </section>
 
-        <section id="table">
-            <table style="border: 1px solid black;">
+        <section id="table" class="card">
+            <table class="card">
                 <thead>
                     <tr>
                         <th>Name</th>
