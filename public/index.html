@@ -61,6 +61,7 @@
             font-weight: bold;
             font-size: 1.5em;
         }
+        
         td{
             font-size: 1.5em;
             text-align: center;
@@ -75,6 +76,11 @@
         table img{
             height: 100px;
         }
+        button{
+            border-radius: 5px;
+            padding: 5px;
+            border: 1px solid grey;
+        }
         button:hover{
             background-color: white;
         }
@@ -86,13 +92,15 @@
     </nav>
 
     <main>
-        <section id="controls" class="card">
+        <section class="card">
             <button onclick="filterBySeries('Animal Crossing')">Animal Crossing</button>
             <button onclick="filterBySeries('Breath of the Wild')">Breath of the Wild</button>
             <button onclick="filterBySeries('Super Mario')">Super Mario</button>
+            <input type="search" id="searchKey" placeholder="Search Name">
+            <button onclick="search()">Search</button>
         </section>
 
-        <section id="table" class="card">
+        <section class="card">
             <table class="card">
                 <thead>
                     <tr>
@@ -103,17 +111,7 @@
                     </tr>
                 </thead>
                 <tbody id="result">
-                    <tr>
-                        <td>Sandy</td>
-                        <td>Animal Crossing</td>
-                        <td><img src="https://raw.githubusercontent.com/N3evin/AmiiboAPI/master/images/icon_04380001-03000502.png"></td>
-                        <td>
-                            <ul>
-                                <li> Date 1</li>
-                                <li>Date 2</li>
-                            </ul>
-                    </td>
-                </tr>
+                    
                 </tbody>
             </table>
         </section>
@@ -159,7 +157,7 @@
         drawTable(state);
     }
 
-    showAllGames();
+    
 
     function filterBySeries(series){
         let filtered = [];
@@ -174,6 +172,31 @@
         drawTable(filtered);
     }
 
+    function search(){
+        //get the search term from the input field
+        let searchKey = document.querySelector('#searchKey').value;
+        
+        let results = [];
+        
+        //iterate all the records in the global state
+        for(let rec of state){
+        
+            //capitalize the search term and text to be case insensitive
+            let searchText = rec.character.toUpperCase();
+            searchKey = searchKey.toUpperCase();
+        
+            //add to resulting array if search term is in the text
+            if ( searchText.search(searchKey) !== -1 ){
+            results.push(rec);
+            }
+        }
+        //draw table with the search results
+        drawTable(results);
+    }
+
+   
+
+    showAllGames();
     </script>
 </body>
 </html>
